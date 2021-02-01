@@ -1,27 +1,35 @@
-const generateJSXNodes = (
-  nodeName: string,
-  tree: any,
-  nodeMappings: any
-): string => {
-  const node = tree[nodeName];
-  const mappedComponent = nodeMappings[resolveJSXType(node)];
+import { getBuiltInComponent } from "../../components/BuiltIn/ComponentFactory";
+import IReactiveComponent from "../../components/BuiltIn/Definitions/Types";
+import { ITreeNode } from "../../components/Designer/Types";
 
-  return mappedComponent.component(node, tree);
+export const generateJSXNodes = (
+  node: ITreeNode,
+  includeWrapper: boolean = false
+): string => {
+  const mappedComponent = resolveComponent(node.type);
+
+  if (!mappedComponent && node.children.length > 0)
+    return generateJSXChildren(node.children, includeWrapper);
+
+  if (!mappedComponent) return "";
+
+  return mappedComponent.code.component(node, node.props, includeWrapper);
 };
 
-export const resolveJSXType = (node: any) => {
-  return node.type.resolvedName ? node.type.resolvedName : node.type;
+export const resolveComponent = (
+  type: string
+): IReactiveComponent | undefined => {
+  return getBuiltInComponent(type) as IReactiveComponent;
 };
 
 export const generateJSXChildren = (
-  nodes: string[],
-  tree: any,
-  nodeMappings: any
+  nodes: ITreeNode[],
+  includeWrapper: boolean = false
 ): string => {
   let nodeString = "";
   nodes.forEach((node) => {
     nodeString = `${nodeString} 
-    ${generateJSXNodes(node, tree, nodeMappings)}`;
+    ${generateJSXNodes(node, includeWrapper)}`;
   });
   return nodeString;
 };

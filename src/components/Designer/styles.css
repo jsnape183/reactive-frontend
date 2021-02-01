@@ -1,0 +1,11 @@
+.designer-component {
+  cursor: pointer;
+}
+
+.designer-component-hover {
+  border: 1px solid green;
+}
+
+.designer-component-selected {
+  border: 1px solid red;
+}

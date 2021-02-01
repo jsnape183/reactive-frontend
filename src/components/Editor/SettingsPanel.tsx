@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import { useEditor } from "@craftjs/core";
 
-export const SettingsPanel = () => {
+const SettingsPanel = () => {
   const { actions, selected } = useEditor((state, query) => {
     const currentNodeId = state.events.selected;
     let selected;
@@ -60,3 +60,5 @@ export const SettingsPanel = () => {
     </Box>
   ) : null;
 };
+
+export default SettingsPanel;

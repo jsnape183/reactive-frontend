@@ -1,5 +1,5 @@
 // components/Topbar.js
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   FormControlLabel,
@@ -7,31 +7,23 @@ import {
   Grid,
   Button as MaterialButton,
 } from "@material-ui/core";
-import { useEditor } from "@craftjs/core";
-import generateReactFromTree from "../../Utils/reactive-codegen/codegen";
 
 interface TopBarPropTypes {
-  onTogglePreview: () => void;
+  onTogglePreview: (value: boolean) => void;
+  showPreview: boolean;
 }
 
-export const TopBar: React.FC<TopBarPropTypes> = ({ onTogglePreview }) => {
-  const { actions, query, enabled } = useEditor((state) => ({
-    enabled: state.options.enabled,
-  }));
-
+const TopBar: React.FC<TopBarPropTypes> = ({
+  onTogglePreview,
+  showPreview,
+}) => {
+  const [enabled, setEnabled] = useState(false);
   return (
     <Box px={1} py={1} mt={3} mb={1} bgcolor="#cbe8e7">
       <Grid container alignItems="center">
         <Grid item xs>
           <FormControlLabel
-            control={
-              <Switch
-                checked={enabled}
-                onChange={(_, value) =>
-                  actions.setOptions((options) => (options.enabled = value))
-                }
-              />
-            }
+            control={<Switch checked={enabled} onChange={(_, value) => {}} />}
             label="Enable"
           />
         </Grid>
@@ -41,7 +33,7 @@ export const TopBar: React.FC<TopBarPropTypes> = ({ onTogglePreview }) => {
             variant="outlined"
             color="secondary"
             onClick={() => {
-              console.log(query.serialize());
+              console.log("TODO");
             }}
           >
             Serialize JSON to console
@@ -52,24 +44,25 @@ export const TopBar: React.FC<TopBarPropTypes> = ({ onTogglePreview }) => {
             variant="outlined"
             color="secondary"
             onClick={() => {
-              console.log(generateReactFromTree(query.getSerializedNodes()));
+              console.log("TODO");
             }}
           >
             Serialize React to console
           </MaterialButton>
 
-          <MaterialButton
-            size="small"
-            variant="outlined"
-            color="secondary"
-            onClick={() => {
-              onTogglePreview();
-            }}
-          >
-            Preview
-          </MaterialButton>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={showPreview}
+                onChange={(_, value) => onTogglePreview(value)}
+              />
+            }
+            label="Preview"
+          />
         </Grid>
       </Grid>
     </Box>
   );
 };
+
+export default TopBar;

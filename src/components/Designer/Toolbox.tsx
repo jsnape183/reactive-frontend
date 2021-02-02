@@ -1,6 +1,6 @@
 import React from "react";
 import { getBuiltInComponents } from "../BuiltIn/ComponentFactory";
-import IReactiveComponent from "../BuiltIn/Definitions/Types";
+import { IReactiveComponent } from "../Designer/Types";
 import { Grid } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";

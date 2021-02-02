@@ -5,7 +5,10 @@ import Designer from "../../components/Designer";
 import Layers from "../../components/Designer/Layers";
 import Toolbox from "../../components/Designer/Toolbox";
 import Propsbox from "../../components/Designer/Propsbox";
-import { ITreeNode } from "../../components/Designer/Types";
+import {
+  ITreeNode,
+  IReactiveComponentProp,
+} from "../../components/Designer/Types";
 import { IReactiveComponent } from "../../components/BuiltIn/ComponentFactory";
 
 const NewEditor = () => {
@@ -13,38 +16,19 @@ const NewEditor = () => {
     {
       id: uuid(),
       type: "Div",
-      props: {},
+      props: {
+        styles: {},
+        settings: {},
+        data: {},
+        interactions: {},
+      },
       allowsChildren: true,
-      children: [
-        {
-          id: uuid(),
-          type: "Paragraph",
-          props: { text: "Hello world!", fontSize: "12px", textAlign: "left" },
-          children: [
-            {
-              id: uuid(),
-              type: "Text",
-              props: {
-                text: "Hello world!",
-              },
-              children: [],
-              allowsChildren: false,
-            },
-          ],
-          allowsChildren: true,
-        },
-        {
-          id: uuid(),
-          type: "Button",
-          props: { text: "Click me!" },
-          children: [],
-          allowsChildren: false,
-        },
-      ],
+      children: [],
     },
   ] as ITreeNode[]);
 
   const [selectedNode, setSelectedNode] = useState(tree[0]);
+  const [selectedPropTab, setSelectedPropTab] = useState("styles");
 
   const findTreeNodeById = (
     tree: ITreeNode[],
@@ -63,14 +47,26 @@ const NewEditor = () => {
     return null;
   };
 
+  const copyProps = (props: IReactiveComponentProp[]) => {
+    const copied: any = {} as any;
+    props.forEach((p: IReactiveComponentProp) => {
+      copied[p.name] = p.defaultValue;
+    });
+    return copied;
+  };
+
   const handleComponentClick = (component: IReactiveComponent) => {
-    console.log(component);
     const newComponent: ITreeNode = {
       id: uuid(),
       type: component.name,
       allowsChildren: component.allowsChildren,
       children: [] as ITreeNode[],
-      props: component.props,
+      props: {
+        styles: copyProps(component.props.styles),
+        settings: copyProps(component.props.settings),
+        data: copyProps(component.props.data),
+        interactions: copyProps(component.props.interactions),
+      },
     };
     const newTree = [...tree];
     const node = findTreeNodeById(newTree, selectedNode.id);
@@ -86,7 +82,7 @@ const NewEditor = () => {
     const node = findTreeNodeById(newTree, selectedNode.id);
     if (!node)
       throw Error(`Could not find component with id: ${selectedNode.id}`);
-    node.props[key] = value;
+    node.props[selectedPropTab][key] = value;
     setTree(newTree);
   };
 
@@ -115,6 +111,10 @@ const NewEditor = () => {
           <Grid item xs={12}>
             <Propsbox
               selectedNode={selectedNode}
+              selectedTab={selectedPropTab}
+              onPropTabChanged={(tabName: string) =>
+                setSelectedPropTab(tabName)
+              }
               onPropChanged={handlePropChanged}
             />
           </Grid>

@@ -1,6 +1,6 @@
 import React from "react";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import IReactiveComponent from "./Types";
+import { IReactiveComponent } from "../../Designer/Types";
 import {
   generateJSXProps,
   generateJSXChildren,
@@ -13,16 +13,18 @@ const Div: IReactiveComponent = {
     component: (node: any, props: any, includeWrapper: boolean) => {
       return `<div id="${node.id}" className="${
         includeWrapper ? "designer-component" : ""
-      }" ${generateJSXProps(props)}>${generateJSXChildren(
-        node.children,
-        includeWrapper
-      )}</div>`;
+      }">${generateJSXChildren(node.children, includeWrapper)}</div>`;
     },
     imports: "",
     importsFrom: "",
     defaultImport: false,
   },
-  props: {},
+  props: {
+    styles: [],
+    settings: [],
+    data: [],
+    interactions: [],
+  },
   allowsChildren: true,
 };
 

@@ -1,5 +1,5 @@
 import { getBuiltInComponent } from "../../components/BuiltIn/ComponentFactory";
-import IReactiveComponent from "../../components/BuiltIn/Definitions/Types";
+import { IReactiveComponent } from "../../components/Designer/Types";
 import { ITreeNode } from "../../components/Designer/Types";
 
 export const generateJSXNodes = (

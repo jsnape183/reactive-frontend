@@ -1,6 +1,7 @@
 import React from "react";
 import TextFields from "@material-ui/icons/TextFields";
-import IReactiveComponent from "./Types";
+import { IReactiveComponent } from "../../Designer/Types";
+import { TextPropsBox } from "../../Designer/Props";
 import { generateJSXChildren } from "../../../Utils/reactive-codegen/generateJSXNodes";
 
 const Paragraph: IReactiveComponent = {
@@ -10,8 +11,8 @@ const Paragraph: IReactiveComponent = {
     component: (node: any, props: any, includeWrapper: boolean) => {
       return `<p id="${node.id}" className="${
         includeWrapper ? "designer-component" : ""
-      }" style={{fontSize:"${props.fontSize}", textAlign:"${
-        props.textAlign
+      }" style={{fontSize:"${props.styles.fontSize}", textAlign:"${
+        props.styles.textAlign
       }"}}>${generateJSXChildren(node.children, includeWrapper)}</p>`;
     },
     imports: "",
@@ -19,8 +20,37 @@ const Paragraph: IReactiveComponent = {
     defaultImport: false,
   },
   props: {
-    fontSize: "12px",
-    textAlign: "left",
+    styles: [
+      {
+        name: "fontSize",
+        defaultValue: "12px",
+        component: (
+          name: string,
+          value: any,
+          onChange: (key: string, value: any) => void
+        ) => (
+          <>
+            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
+          </>
+        ),
+      },
+      {
+        name: "textAlign",
+        defaultValue: "12px",
+        component: (
+          name: string,
+          value: any,
+          onChange: (key: string, value: any) => void
+        ) => (
+          <>
+            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
+          </>
+        ),
+      },
+    ],
+    settings: [],
+    data: [],
+    interactions: [],
   },
   allowsChildren: true,
 };

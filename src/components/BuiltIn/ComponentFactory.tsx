@@ -1,5 +1,5 @@
 import { Div, Button, Paragraph, Text } from "./Definitions";
-import IReactiveComponent from "./Definitions/Types";
+import { IReactiveComponent } from "../Designer/Types";
 
 export const getBuiltInComponent = (
   componentType: string

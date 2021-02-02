@@ -29,14 +29,15 @@ const Propsbox: React.FC<IPropsboxProps> = ({
         const component = getBuiltInComponent(selectedNode.type);
         const value = selectedNode.props[selectedTab][key];
         if (!component) return <></>;
-        console.log({ selectedTab, key });
-        console.log(component.props[selectedTab]);
         const prop = component.props[selectedTab].find(
           (p: IReactiveComponentProp) => p.name === key
         );
         if (!prop) return <></>;
-        return prop.component(key, value, (key: string, value: any) =>
-          onPropChanged(key, value)
+        return prop.component(
+          key,
+          prop.name,
+          value,
+          (key: string, value: any) => onPropChanged(key, value)
         );
       })}
     </>

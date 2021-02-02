@@ -1,7 +1,7 @@
 import React from "react";
 import TextFields from "@material-ui/icons/TextFields";
 import { IReactiveComponent } from "../../Designer/Types";
-import { TextPropsBox } from "../../Designer/Props";
+import { generateTextPropsBox } from "../../Designer/Props";
 import { generateJSXChildren } from "../../../Utils/reactive-codegen/generateJSXNodes";
 
 const Paragraph: IReactiveComponent = {
@@ -21,32 +21,8 @@ const Paragraph: IReactiveComponent = {
   },
   props: {
     styles: [
-      {
-        name: "fontSize",
-        defaultValue: "12px",
-        component: (
-          name: string,
-          value: any,
-          onChange: (key: string, value: any) => void
-        ) => (
-          <>
-            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
-          </>
-        ),
-      },
-      {
-        name: "textAlign",
-        defaultValue: "12px",
-        component: (
-          name: string,
-          value: any,
-          onChange: (key: string, value: any) => void
-        ) => (
-          <>
-            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
-          </>
-        ),
-      },
+      generateTextPropsBox("fontSize", "Font Size", "12px"),
+      generateTextPropsBox("textAlign", "Text Align", "left"),
     ],
     settings: [],
     data: [],

@@ -3,6 +3,7 @@ import { TextField } from "@material-ui/core";
 import { IPropComponentProps } from "./types";
 
 const TextPropsBox: React.FC<IPropComponentProps> = ({
+  propKey,
   name,
   value,
   onValueChanged,
@@ -10,11 +11,11 @@ const TextPropsBox: React.FC<IPropComponentProps> = ({
   return (
     <>
       <TextField
-        id={name}
-        key={name}
+        id={propKey}
+        key={propKey}
         label={name}
         value={value}
-        onChange={(e) => onValueChanged(name, e.target.value)}
+        onChange={(e) => onValueChanged(propKey, e.target.value)}
       />
     </>
   );

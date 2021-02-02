@@ -2,7 +2,7 @@ import React from "react";
 import IndeterminateCheckBoxIcon from "@material-ui/icons/IndeterminateCheckBox";
 import { IReactiveComponent } from "../../Designer/Types";
 import { generateJSXProps } from "../../../Utils/reactive-codegen/generateJSXNodes";
-import { TextPropsBox } from "../../Designer/Props";
+import { generateTextPropsBox } from "../../Designer/Props";
 
 const Button: IReactiveComponent = {
   name: "Button",
@@ -19,21 +19,7 @@ const Button: IReactiveComponent = {
   },
   props: {
     styles: [],
-    settings: [
-      {
-        name: "text",
-        defaultValue: "Click me!",
-        component: (
-          name: string,
-          value: any,
-          onChange: (key: string, value: any) => void
-        ) => (
-          <>
-            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
-          </>
-        ),
-      },
-    ],
+    settings: [generateTextPropsBox("text", "text", "Click me!")],
     data: [],
     interactions: [],
   },

@@ -1,7 +1,7 @@
 import React from "react";
 import TextFields from "@material-ui/icons/TextFields";
 import { IReactiveComponent } from "../../Designer/Types";
-import { TextPropsBox } from "../../Designer/Props";
+import { generateTextPropsBox } from "../../Designer/Props";
 
 const Text: IReactiveComponent = {
   name: "Text",
@@ -16,21 +16,7 @@ const Text: IReactiveComponent = {
   },
   props: {
     styles: [],
-    settings: [
-      {
-        name: "text",
-        defaultValue: "Hello world!",
-        component: (
-          name: string,
-          value: any,
-          onChange: (key: string, value: any) => void
-        ) => (
-          <>
-            <TextPropsBox name={name} value={value} onValueChanged={onChange} />
-          </>
-        ),
-      },
-    ],
+    settings: [generateTextPropsBox("text", "text", "Hello world!")],
     data: [],
     interactions: [],
   },

@@ -15,8 +15,10 @@ export interface ITreeNode {
 }
 
 export interface IReactiveComponentProp {
+  key: string;
   name: string;
   component: (
+    key: string,
     name: string,
     value: any,
     onChange: (key: string, value: any) => void

@@ -48,7 +48,7 @@ export const generateButtonGroup = (
   subheading: string,
   name: string,
   defaultValue: any,
-  customProps: any
+  customProps?: any
 ): IReactiveComponentProp =>
   generateComponent(
     key,
@@ -84,7 +84,7 @@ export const generateDropDownList = (
   subheading: string,
   name: string,
   defaultValue: any,
-  customProps: any
+  customProps?: any
 ): IReactiveComponentProp =>
   generateComponent(
     key,

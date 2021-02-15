@@ -218,6 +218,74 @@ const stylesTemplate = [
     ],
     {}
   ),
+  generateDropDownList("fontFamily", "Typography", "", "Font", [
+    { value: "Times New Roman", selected: true },
+  ]),
+  generateDropDownList("fontWeight", "Typography", "", "Weight", [
+    { value: "100", selected: true },
+    { value: "200", selected: false },
+    { value: "300", selected: false },
+    { value: "400", selected: false },
+    { value: "500", selected: false },
+    { value: "600", selected: false },
+    { value: "700", selected: false },
+    { value: "800", selected: false },
+  ]),
+  generateTextDropDown(
+    "fontSize",
+    "Typography",
+    "",
+    "Size",
+    [
+      {
+        text: "12",
+        selectList: [
+          { value: "pt", selected: true },
+          { value: "px", selected: false },
+          { value: "%", selected: false },
+          { value: "em", selected: false },
+          { value: "rem", selected: false },
+        ],
+      },
+    ],
+    { textField: { type: "number" } }
+  ),
+  generateTextDropDown(
+    "fontHeight",
+    "Typography",
+    "",
+    "Height",
+    [
+      {
+        text: "1",
+        selectList: [
+          { value: "pt", selected: true },
+          { value: "px", selected: false },
+          { value: "%", selected: false },
+          { value: "em", selected: false },
+          { value: "rem", selected: false },
+        ],
+      },
+    ],
+    { textField: { type: "number" } }
+  ),
+  generateColorPicker("color", "Typography", "", "Color", "#ffffff"),
+  generateButtonGroup("textAlign", "Typography", "", "Align", [
+    { value: "left", selected: true },
+    { value: "center", selected: false },
+    { value: "right", selected: false },
+    { value: "justify", selected: false },
+  ]),
+  generateButtonGroup("fontSyle", "Typography", "", "Style", [
+    { value: "regular", selected: true },
+    { value: "italic", selected: false },
+  ]),
+  generateButtonGroup("textDecoration", "Typography", "", "Decoration", [
+    { value: "none", selected: true },
+    { value: "underline", selected: false },
+    { value: "overline", selected: false },
+    { value: "strikethrough", selected: false },
+  ]),
   generatePositionPicker(
     "borderSize",
     "Border",

@@ -25,7 +25,7 @@ const Toolbox: React.FC<IToolboxProps> = ({ onComponentClick }) => {
     <Grid container direction="row" className={classes.componentsGrid}>
       {getBuiltInComponents().map((component: IReactiveComponent) => {
         return (
-          <Grid direction="row" item xs={6}>
+          <Grid item key={component.name} xs={6}>
             <IconButton
               color="primary"
               aria-label="Text"

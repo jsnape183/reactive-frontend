@@ -2,11 +2,7 @@ import React from "react";
 import { TextField } from "@material-ui/core";
 import { IPropComponentProps } from "./types";
 
-export interface ITextBoxCustomProps {
-  type: string;
-}
-
-const TextPropsBox: React.FC<IPropComponentProps> = ({
+const NumberPropsBox: React.FC<IPropComponentProps> = ({
   propKey,
   name,
   value,
@@ -20,6 +16,7 @@ const TextPropsBox: React.FC<IPropComponentProps> = ({
         key={propKey}
         label={name}
         value={value}
+        type="number"
         onChange={(e) => onValueChanged(propKey, e.target.value)}
         {...customProps}
       />
@@ -27,4 +24,4 @@ const TextPropsBox: React.FC<IPropComponentProps> = ({
   );
 };
 
-export default TextPropsBox;
+export default NumberPropsBox;

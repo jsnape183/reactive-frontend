@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { uuid } from "uuidv4";
 import { Grid } from "@material-ui/core";
+import * as lodash from "lodash";
 import Designer from "../../components/Designer";
 import Layers from "../../components/Designer/Layers";
 import Toolbox from "../../components/Designer/Toolbox";
@@ -17,7 +18,17 @@ const NewEditor = () => {
       id: uuid(),
       type: "Div",
       props: {
-        styles: {},
+        styles: {
+          direction: [
+            { value: "column", selected: true },
+            { value: "row", selected: true },
+          ],
+          marginAndPadding: {
+            margin: { top: 0, right: 0, bottom: 0, left: 0 },
+            padding: { top: 0, right: 0, bottom: 0, left: 0 },
+            units: "px",
+          },
+        },
         settings: {},
         data: {},
         interactions: {},
@@ -50,7 +61,7 @@ const NewEditor = () => {
   const copyProps = (props: IReactiveComponentProp[]) => {
     const copied: any = {} as any;
     props.forEach((p: IReactiveComponentProp) => {
-      copied[p.name] = p.defaultValue;
+      copied[p.key] = lodash.cloneDeep(p.defaultValue);
     });
     return copied;
   };
@@ -68,7 +79,7 @@ const NewEditor = () => {
         interactions: copyProps(component.props.interactions),
       },
     };
-    const newTree = [...tree];
+    const newTree = lodash.cloneDeep(tree);
     const node = findTreeNodeById(newTree, selectedNode.id);
     if (!node)
       throw Error(`Could not find component with id: ${selectedNode.id}`);
@@ -88,7 +99,7 @@ const NewEditor = () => {
 
   return (
     <Grid container direction="row">
-      <Grid item xs={3} spacing={2}>
+      <Grid item xs={3}>
         <Grid container direction="column">
           <Grid item xs={12}>
             <Toolbox onComponentClick={handleComponentClick} />
@@ -103,10 +114,10 @@ const NewEditor = () => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={6} spacing={2}>
+      <Grid item xs={6}>
         <Designer tree={tree}></Designer>
       </Grid>
-      <Grid item xs={3} spacing={2}>
+      <Grid item xs={3}>
         <Grid container direction="column">
           <Grid item xs={12}>
             <Propsbox

@@ -1,8 +1,9 @@
 import React from "react";
 import TextFields from "@material-ui/icons/TextFields";
 import { IReactiveComponent } from "../../Designer/Types";
-import { generateTextPropsBox } from "../../Designer/Props";
+import { generateTextBox } from "../../Designer/Props";
 import { generateJSXChildren } from "../../../Utils/reactive-codegen/generateJSXNodes";
+import stylesTemplate from "../../Designer/Props/stylesTemplate";
 
 const Paragraph: IReactiveComponent = {
   name: "Paragraph",
@@ -21,8 +22,9 @@ const Paragraph: IReactiveComponent = {
   },
   props: {
     styles: [
-      generateTextPropsBox("fontSize", "Font Size", "12px"),
-      generateTextPropsBox("textAlign", "Text Align", "left"),
+      generateTextBox("fontSize", "Font", "", "Font Size", "12px"),
+      generateTextBox("textAlign", "Alignment", "", "Text Align", "left"),
+      ...stylesTemplate,
     ],
     settings: [],
     data: [],

@@ -16,6 +16,8 @@ export interface ITreeNode {
 
 export interface IReactiveComponentProp {
   key: string;
+  heading: string;
+  subheading: string;
   name: string;
   component: (
     key: string,
